@@ -1,0 +1,5 @@
+<%= form_for :team, :method=>:post, :url=>{:action=>"create", :id=>@parent.id} do |f| %>
+  <p><label>parent: <%= @parent.name %></label></p>
+  <p><label>name <br/><%= f.text_field(:name) %></label></p>
+  <p><%= submit_tag("create") %></p>
+<% end %>
