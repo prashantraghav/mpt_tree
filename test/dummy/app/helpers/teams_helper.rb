@@ -1,9 +1,21 @@
 module TeamsHelper
   def tree_view(team)
+    return unless team
     html= "<b>#{link_to_show(team)}</b><br/>"
     team.tree.each do |node|
       html+= "&nbsp;"*3*node.level(team)+link_to_show(node)+"<br/>"
     end
+    return raw(html)
+  end
+
+  def parents_breadcrumbs(team)
+    return unless team
+    html ="<span>"
+    team.parents.each_with_index do | parent, index |
+      html+=link_to_show(parent)
+      html+="<small> > </small>" if index < team.parents.count-1
+    end
+    html+="</span>"
     return raw(html)
   end
 

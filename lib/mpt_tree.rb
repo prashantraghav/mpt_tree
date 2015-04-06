@@ -1,13 +1,14 @@
 require "mpt_tree/engine"
 
 module MptTree
+  
   def acts_as_tree
     has_one :mpt_tree_node, :as=>:tree, :dependent=>:destroy, :class_name=>"MptTree::Node"
     default_scope lambda {joins(:mpt_tree_node).order('mpt_tree_nodes.lft')}
 
     class_eval do 
       def make_it_root
-        create_mpt_tree_node unless MptTree::Node.root_created? self.class.name
+        create_mpt_tree_node #unless MptTree::Node.root_created? self.class.name
       end
 
       def tree
@@ -16,6 +17,7 @@ module MptTree
       end
 
       def insert(node)
+        raise "can not be inserted! node already have parent." if mpt_tree_node
         mpt_tree_node.insert(node)
       end
 
@@ -34,6 +36,11 @@ module MptTree
           nodes << node if node.level(self) == level
         end
         nodes
+      end
+
+      def change_parent(node)
+        mpt_tree_node.destroy
+        node.insert(self)
       end
 
       alias_method :<<, :insert

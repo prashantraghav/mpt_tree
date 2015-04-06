@@ -5,7 +5,6 @@ module MptTree
     before_create :create_root_node
     before_destroy :delete_node
 
-
     def insert(node)
       Node.transaction do
         Node.where(:tree_type=>tree_type).where("rgt >= :rgt", :rgt=>self.rgt).update_all("rgt=rgt+2")
@@ -41,19 +40,22 @@ module MptTree
     end
 
     private
-    def delete_node
-      allow_delete = false
-      if(self.leaf?)
+      def delete_node
+        allow_delete = false
+        raise "the node you are trying to delete is not a leaf node!"  unless(self.leaf?)
         Node.where(:tree_type=>tree_type).where("lft > ?", self.rgt).update_all("lft = lft-2")
         Node.where(:tree_type=>tree_type).where("rgt > ?", self.rgt).update_all("rgt = rgt-2")
         allow_delete = true
+        #allow_delete
       end
-      allow_delete
-    end
 
-    def create_root_node
-      self.lft, self.rgt = 1, 2  unless Node.root_created?(tree_type)
-    end
+      def create_root_node
+        unless Node.root_created?(tree_type)
+          self.lft, self.rgt = 1, 2  
+        else
+          raise "root node is already created" if self.lft == nil || self.rgt == nil
+        end
+      end
 
   end
 
