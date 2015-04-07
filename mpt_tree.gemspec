@@ -7,17 +7,17 @@ require "mpt_tree/version"
 Gem::Specification.new do |s|
   s.name        = "mpt_tree"
   s.version     = MptTree::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of MptTree."
-  s.description = "TODO: Description of MptTree."
+  s.authors     = ["Prashant Raghav"]
+  s.email       = ["prashantraghav@gmail.com"]
+  s.homepage    = "https://github.com/prashantraghav/mpt_tree"
+  s.summary     = "based on modified preorder tree traversal algorithm"
+  s.description = "MptTree allows any rails model to work as tree."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.1.0"
+  s.add_dependency "rails"
 
   s.add_development_dependency "sqlite3"
 end
