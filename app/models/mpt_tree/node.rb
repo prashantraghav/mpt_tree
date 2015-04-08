@@ -46,7 +46,7 @@ module MptTree
         Node.where(:tree_type=>tree_type).where("lft > ?", self.rgt).update_all("lft = lft-2")
         Node.where(:tree_type=>tree_type).where("rgt > ?", self.rgt).update_all("rgt = rgt-2")
         allow_delete = true
-        #allow_delete
+        allow_delete
       end
 
       def create_root_node

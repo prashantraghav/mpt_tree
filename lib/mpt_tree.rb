@@ -17,7 +17,7 @@ module MptTree
       end
 
       def insert(node)
-        raise "can not be inserted! node already have parent." if mpt_tree_node
+        raise "can not be inserted! node already have parent." if node.mpt_tree_node
         mpt_tree_node.insert(node)
       end
 

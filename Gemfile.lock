@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     mpt_tree (0.0.1)
-      rails (~> 4.1.0)
+      rails
 
 GEM
   remote: https://rubygems.org/
