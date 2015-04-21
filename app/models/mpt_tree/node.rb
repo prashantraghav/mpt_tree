@@ -17,7 +17,7 @@ module MptTree
       Node.where(:tree_type=>tree_type).where("lft > ? AND rgt < ?", self.lft, self.rgt ).order('lft').map(&:tree_id)
     end
 
-    def parents
+    def ancestors
       Node.where(:tree_type=>tree_type).where("lft < ? AND rgt > ?", self.lft, self.rgt).order('lft').map(&:tree_id)
     end
 

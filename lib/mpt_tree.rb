@@ -9,6 +9,7 @@ module MptTree
     class_eval do 
       def make_it_root
         create_mpt_tree_node #unless MptTree::Node.root_created? self.class.name
+        self.reload
       end
 
       def tree
@@ -21,8 +22,28 @@ module MptTree
         mpt_tree_node.insert(node)
       end
 
-      def parents
-        node_ids = mpt_tree_node.parents
+      def parent
+        ancestors.last
+      end
+      
+      def siblings
+        level(parent)
+      end
+
+      def children
+        nodes_at_level(1)
+      end
+      
+      def self.root
+        name.constantize.first
+      end
+
+      def root?
+         (level(Team.first) == 0) ? true : false
+      end
+
+      def ancestors
+        node_ids = mpt_tree_node.ancestors
         self.class.name.constantize.where(:id => node_ids)
       end
 

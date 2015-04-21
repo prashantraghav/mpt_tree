@@ -8,12 +8,12 @@ module TeamsHelper
     return raw(html)
   end
 
-  def parents_breadcrumbs(team)
+  def ancestors_breadcrumbs(team)
     return unless team
     html ="<span>"
-    team.parents.each_with_index do | parent, index |
+    team.ancestors.each_with_index do | parent, index |
       html+=link_to_show(parent)
-      html+="<small> > </small>" if index < team.parents.count-1
+      html+="<small> > </small>" if index < team.ancestors.count-1
     end
     html+="</span>"
     return raw(html)
