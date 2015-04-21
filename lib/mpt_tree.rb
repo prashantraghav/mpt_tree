@@ -27,7 +27,7 @@ module MptTree
       end
       
       def siblings
-        level(parent)
+        parent.nodes_at_level(level(parent)) - [self]
       end
 
       def children
@@ -39,7 +39,11 @@ module MptTree
       end
 
       def root?
-         (level(Team.first) == 0) ? true : false
+         (level(self.class.name.constantize.first) == 0) ? true : false
+      end
+
+      def leaf?
+        !children.present?
       end
 
       def ancestors
