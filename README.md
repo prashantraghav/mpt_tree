@@ -67,6 +67,7 @@ rake db:migrate
 
 ##Contributing and license
 mpt_tree will be updated with the changing version of Ruby and Rails, also new methods will be added to give more features and enhance the performace.
+
 Question? Bug report? Faulty/incomplete documentation? Feature request? Please post an issue
 
 Copyright (c) 2015 Prashant Raghav, released under the MIT license
