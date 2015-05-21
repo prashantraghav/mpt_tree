@@ -57,6 +57,8 @@ rake db:migrate
   children                returns the list of childrens
   root?                   returns true if node is root otherwise false
   leaf?                   returns true if node is leaf otherwise false
+  ancestors               returns the list of ancestors
+  self_with_ancestors     returns the list of ancestors and self object 
   nodes_at_level(level)   reutrns the list of nodes at given level.
   change_parent(object)   change the parent of node to object if the node is leaf.     
 ```
