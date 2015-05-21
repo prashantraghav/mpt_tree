@@ -51,6 +51,10 @@ module MptTree
         self.class.name.constantize.where(:id => node_ids)
       end
 
+      def self_with_ancestors
+        ancestors << self
+      end
+
       def level(parent=nil)
         mpt_tree_node.level(parent)
       end
