@@ -1,2 +1,6 @@
-<%= ancestors_breadcrumbs(@team) %>
-<p><%= tree_view @team %></p>
+<h3>Teams</h3>
+<div>
+  <%= link_to "New Team", new_team_path %>
+</div>
+<%= render "teams/list" %>
+

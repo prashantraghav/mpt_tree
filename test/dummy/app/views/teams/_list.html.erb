@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      
+        
+      <th>Title</th>
+    
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @teams.each do |team| %>
+    <tr>
+    
+      
+    <td><%= team.title %></td>
+  
+    <td>
+      <%= link_to "child", team_path(team) %>
+      <%= link_to "edit", edit_team_path(team) %>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+

@@ -1,3 +1,6 @@
-<%= ancestors_breadcrumbs(@team) %>
-<h1><%= @team.name %></h1>
-<p><span> <%= link_to_add_child @team %> | <%= link_to_childs @team %> | <%= link_to_edit @team %> | <%= link_to_delete @team %> </span></p>
+<h3><%= @parent.title %></h3>
+<div>
+  <%= link_to "New Team", new_team_path(:parent_id=>@parent.id) %>
+</div>
+<%= render "teams/list", :title=>'teams' %>
+

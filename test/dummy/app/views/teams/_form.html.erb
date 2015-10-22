@@ -1,0 +1,17 @@
+<div>
+  <%= form_for @team do |f|%>
+    <%= f.hidden_field :parent_id, :value=>@parent_id %>
+    
+      
+      <label> title </label>
+      <div>
+        <%= f.text_field :title %>
+      </div>
+      <div>
+        <%= f.submit %>
+        <%= link_to "Cancel", teams_path %>
+      </div>
+    
+  <% end %>
+</div>
+

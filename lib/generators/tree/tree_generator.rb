@@ -25,6 +25,15 @@ module Tree
      template "controller.rb", "app/controllers/#{file_name.pluralize}_controller.rb"
     end
 
+    def view_templates
+      template "views/index.html.erb", "app/views/#{file_name.pluralize}/index.html.erb"
+      template "views/show.html.erb", "app/views/#{file_name.pluralize}/show.html.erb"
+      template "views/edit.html.erb", "app/views/#{file_name.pluralize}/edit.html.erb"
+      template "views/new.html.erb", "app/views/#{file_name.pluralize}/new.html.erb"
+      template "views/_list.html.erb", "app/views/#{file_name.pluralize}/_list.html.erb"
+      template "views/_form.html.erb", "app/views/#{file_name.pluralize}/_form.html.erb"
+    end
+
     def add_resources_to_routes
       if behavior.to_s == "invoke"
         inject_into_file "config/routes.rb", :after=>"Rails.application.routes.draw do\n" do "

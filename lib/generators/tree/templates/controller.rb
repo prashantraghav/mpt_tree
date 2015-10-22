@@ -21,7 +21,7 @@ class <%= file_name.pluralize.camelize %>Controller < ApplicationController
   end
 
   def create
-    @<%= file_name %> = <%= file_name.camelize %>.new(client_params)
+    @<%= file_name %> = <%= file_name.camelize %>.new(<%= file_name %>_params)
     @<%= file_name %>.save
     parent_<%= file_name %> << @<%= file_name %>
     redirect_to <%= file_name %>_path(@<%= file_name %>), notice: '<%= file_name.camelize %> was successfully created.' 
@@ -47,7 +47,7 @@ class <%= file_name.pluralize.camelize %>Controller < ApplicationController
 
   def parent_<%= file_name %>
     parent_<%= file_name %>_id = (params.require(:<%= file_name %>).permit(:parent_id)[:parent_id])
-    <%= file_name %> = (parent_<%= file_name %>_id.empty?) ? <%= file_name.camelize %>.root : <%= file_name.camelize %>.find(parent_client_id)
+    <%= file_name %> = (parent_<%= file_name %>_id.empty?) ? <%= file_name.camelize %>.root : <%= file_name.camelize %>.find(parent_<%= file_name %>_id)
   end
 
   def root_entry 

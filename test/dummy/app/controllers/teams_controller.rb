@@ -21,7 +21,7 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.new(client_params)
+    @team = Team.new(team_params)
     @team.save
     parent_team << @team
     redirect_to team_path(@team), notice: 'Team was successfully created.' 
@@ -41,13 +41,13 @@ class TeamsController < ApplicationController
   end
 
   def team_params 
-           
-    params.require(:team).permit(:title,:name)
+        
+    params.require(:team).permit(:title)
   end
 
   def parent_team
     parent_team_id = (params.require(:team).permit(:parent_id)[:parent_id])
-    team = (parent_team_id.empty?) ? Team.root : Team.find(parent_client_id)
+    team = (parent_team_id.empty?) ? Team.root : Team.find(parent_team_id)
   end
 
   def root_entry 

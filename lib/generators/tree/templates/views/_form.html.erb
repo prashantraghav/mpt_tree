@@ -1,0 +1,17 @@
+<div>
+  <%%= form_for @<%= file_name %> do |f|%>
+    <%%= f.hidden_field :parent_id, :value=>@parent_id %>
+    <% @args.each do |arg| %>
+      <% ar = arg.split(':') %>
+      <label> <%= ar[0] %> </label>
+      <div>
+        <%%= f.text_field :<%= ar[0] %> %>
+      </div>
+      <div>
+        <%%= f.submit %>
+        <%%= link_to "Cancel", <%= file_name.pluralize %>_path %>
+      </div>
+    <% end %>
+  <%% end %>
+</div>
+

@@ -1,0 +1,6 @@
+<h3><%%= @parent.title %></h3>
+<div>
+  <%%= link_to "New <%= file_name.camelize %>", new_<%= file_name %>_path(:parent_id=>@parent.id) %>
+</div>
+<%%= render "<%= file_name.pluralize %>/list", :title=>'<%= file_name.pluralize %>' %>
+

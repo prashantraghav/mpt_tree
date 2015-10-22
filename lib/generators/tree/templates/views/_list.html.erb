@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <% @args.each do |arg| %>
+        <% ar = arg.split(':') %>
+      <th><%= ar[0].camelize %></th>
+    <% end %>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%% @<%= file_name.pluralize %>.each do |<%= file_name %>| %>
+    <tr>
+    <% @args.each do |arg| %>
+      <% ar = arg.split(':') %>
+    <td><%%= <%= file_name %>.<%= ar[0] %> %></td>
+  <% end %>
+    <td>
+      <%%= link_to "child", <%= file_name %>_path(<%= file_name %>) %>
+      <%%= link_to "edit", edit_<%= file_name %>_path(<%= file_name %>) %>
+    </td>
+  </tr>
+  <%% end %>
+  </tbody>
+</table>
+
