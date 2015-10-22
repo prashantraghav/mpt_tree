@@ -6,11 +6,9 @@ module Tree
       copy_file  "init.rb", init_file unless File.file? init_file
     end
 
-    #def copy_sample_model
-    # template "model.rb", "app/models/#{file_name}.rb"
-    #end
-
     def migration
+      args.unshift('title:string')
+      @args = args
       Rails::Generators.invoke('model', [file_name, args, '-s'], {:behavior=>behavior})
     end
 
@@ -19,6 +17,19 @@ module Tree
         inject_into_file "app/models/#{file_name}.rb", :after=>"ActiveRecord::Base\n" do <<-'TREE'
         acts_as_tree
         TREE
+        end
+      end
+    end
+
+    def controller_template
+     template "controller.rb", "app/controllers/#{file_name.pluralize}_controller.rb"
+    end
+
+    def add_resources_to_routes
+      if behavior.to_s == "invoke"
+        inject_into_file "config/routes.rb", :after=>"Rails.application.routes.draw do\n" do "
+          resources :#{file_name.pluralize}
+          "
         end
       end
     end

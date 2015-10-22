@@ -1,53 +1,56 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :delete, :update]
+  before_action :root_entry, :only=>[:index]
+  before_action :set_team, :only=>[:edit, :update, :destroy, :show]
 
   def index
-    @team = (params[:id]) ? Team.find(params[:id]) : Team.first
+    parent = Team.root 
+    @teams = parent.children
   end
 
   def show
-    @team = Team.find params[:id]
-  end
-
-  def create
     @parent = Team.find(params[:id])
-    @team = Team.create(team_params)
-    @parent << @team
-    flash[:notice] = " new team created";
-    redirect_to(:action=>"index", :id=>@parent.id)
+    @teams = @parent.children
   end
 
-  def child
-    @parent = Team.find params[:id]
+  def new
     @team = Team.new
+    @parent_id = params[:parent_id]
   end
 
   def edit
-    @team = Team.find params[:id]
+  end
+
+  def create
+    @team = Team.new(client_params)
+    @team.save
+    parent_team << @team
+    redirect_to team_path(@team), notice: 'Team was successfully created.' 
   end
 
   def update
-    @team.update_attributes(team_params)
-    flash[:notice] = "team updated";
-    redirect_to(:action=>"show", :id=>@team.id)
+    @team.update(team_params)
+    redirect_to team_path(@team), notice: 'Team was successfully updated.' 
   end
 
-  def delete
-    begin
-      @team.destroy
-      flash[:notice] = "team deleted"
-    rescue Exception=>e
-      flash[:notice] = e.message;
-    end
+  def destroy
   end
-
 
   private 
-    def team_params
-      params.require(:team).permit(:name)
-    end
+  def set_team
+    @team = Team.find params[:id]
+  end
 
-    def set_team
-      @team = Team.find params[:id]
-    end
+  def team_params 
+           
+    params.require(:team).permit(:title,:name)
+  end
+
+  def parent_team
+    parent_team_id = (params.require(:team).permit(:parent_id)[:parent_id])
+    team = (parent_team_id.empty?) ? Team.root : Team.find(parent_client_id)
+  end
+
+  def root_entry 
+    Team.create(:title=>'root').make_it_root if !Team.first
+  end
 end
