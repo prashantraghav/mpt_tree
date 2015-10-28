@@ -24,7 +24,7 @@ class <%= file_name.pluralize.camelize %>Controller < ApplicationController
     @<%= file_name %> = <%= file_name.camelize %>.new(<%= file_name %>_params)
     @<%= file_name %>.save
     parent_<%= file_name %> << @<%= file_name %>
-    redirect_to <%= file_name %>_path(@<%= file_name %>), notice: '<%= file_name.camelize %> was successfully created.' 
+    redirect_to <%= file_name %>_path(parent_<%= file_name %>), notice: '<%= file_name.camelize %> was successfully created.' 
   end
 
   def update
@@ -33,6 +33,11 @@ class <%= file_name.pluralize.camelize %>Controller < ApplicationController
   end
 
   def destroy
+    begin
+    @<%= file_name%>.destroy
+    rescue => ex
+      redirect_to <%= file_name %>_path(@<%= file_name %>), alert: 'A parent <%= file_name.camelize %> can not be deleted' 
+    end
   end
 
   private 

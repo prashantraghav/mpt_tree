@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+          resources :batches
+          
           resources :teams
             resources :teams
   get 'teams/index'

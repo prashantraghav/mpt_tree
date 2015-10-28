@@ -69,6 +69,7 @@ module MptTree
 
       def change_parent(node)
         mpt_tree_node.destroy
+        self.reload
         node.insert(self)
       end
 

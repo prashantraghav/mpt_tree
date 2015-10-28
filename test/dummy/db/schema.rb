@@ -11,9 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022111617) do
+ActiveRecord::Schema.define(version: 20151028131820) do
 
-  create_table "mpt_tree_nodes", force: :cascade do |t|
+  create_table "batches", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mpt_tree_nodes", force: true do |t|
     t.integer  "tree_id"
     t.string   "tree_type"
     t.integer  "lft"
@@ -22,10 +28,11 @@ ActiveRecord::Schema.define(version: 20151022111617) do
     t.datetime "updated_at"
   end
 
-  create_table "teams", force: :cascade do |t|
+  create_table "teams", force: true do |t|
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

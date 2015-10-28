@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     @team.save
     parent_team << @team
-    redirect_to team_path(@team), notice: 'Team was successfully created.' 
+    redirect_to team_path(parent_team), notice: 'Team was successfully created.' 
   end
 
   def update
@@ -33,6 +33,11 @@ class TeamsController < ApplicationController
   end
 
   def destroy
+    begin
+    @team.destroy
+    rescue => ex
+      redirect_to team_path(@team), alert: 'A parent Team can not be deleted' 
+    end
   end
 
   private 
