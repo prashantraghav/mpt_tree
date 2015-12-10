@@ -12,7 +12,7 @@ Mpt_tree is a flexible solution to make any model work as tree structure. It is 
 ##Getting started
 You can add it to your Gemfile with:
 ```ruby
-gem 'mpt_tree', :git=>'https://github.com/prashantraghav/mpt_tree.git'
+gem 'mpt_tree'
 ```
 Run the bundle command to install it.
 
